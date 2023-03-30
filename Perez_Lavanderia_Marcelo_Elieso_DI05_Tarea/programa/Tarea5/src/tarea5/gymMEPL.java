@@ -5,10 +5,15 @@
  */
 package tarea5;
 
+import java.awt.Container;
 import java.io.File;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.help.HelpBroker;
 import javax.help.HelpSet;
+import javax.help.HelpSetException;
 import javax.swing.JOptionPane;
 
 /**
@@ -16,13 +21,52 @@ import javax.swing.JOptionPane;
  * @author meper
  */
 public class gymMEPL extends javax.swing.JFrame {
+    
+    
 
-    /**
-     * Creates new form gymMEPL
-     */
+    /*public static void ayuda(){
+        try {
+            //cargar fichero de ayuda
+            File fichero=new File("src/help/help.hs");
+            URL hsURL=fichero.toURI().toURL();
+            
+            //crear el HelpSet
+            HelpSet helpset= new HelpSet(this.getClass().getClassLoader(),hsURL);
+            
+            HelpBroker hb=helpset.createHelpBroker();
+            
+            //ayuda al hacer click en el JmenuItem
+            hb.enableHelpOnButton(itemAyuda, "gym", helpset);
+            //ayuda al pulsar F1 sobre la ventana principal
+            hb.enableHelpKey(principal.getContentPane(),"gym", helpset);
+            //ayuda al pulsar F1 sobre la ventana principal
+            hb.enableHelpKey(principal.getContentPane(),"sesionescliente", helpset);
+        } catch (MalformedURLException | HelpSetException ex) {
+            Logger.getLogger(gymMEPL.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        }*/
     public gymMEPL() {
-        initComponents();
-        this.setLocationRelativeTo(null);
+        try {
+            initComponents();
+            this.setLocationRelativeTo(null);
+            //cargar fichero de ayuda
+            File fichero=new File("src/help/help.hs");
+            URL hsURL=fichero.toURI().toURL();
+            
+            //crear el HelpSet
+            HelpSet helpset= new HelpSet(getClass().getClassLoader(),hsURL);
+            
+            HelpBroker hb=helpset.createHelpBroker();
+            
+            //ayuda al hacer click en el JmenuItem
+            hb.enableHelpOnButton(itemAyuda, "gym", helpset);
+            //ayuda al pulsar F1 sobre la ventana principal          
+            hb.enableHelpKey(principal,"gym", helpset);
+            //ayuda al pulsar F1 sobre la ventana principal
+            hb.enableHelpKey(infoSesiones.getContentPane(),"sesionescliente", helpset);
+        } catch (HelpSetException | MalformedURLException ex) {
+            Logger.getLogger(gymMEPL.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -34,7 +78,7 @@ public class gymMEPL extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dialogoInforme = new javax.swing.JDialog();
+        infoSesiones = new javax.swing.JDialog();
         jPanel2 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -45,18 +89,19 @@ public class gymMEPL extends javax.swing.JFrame {
         btnCancelar = new javax.swing.JButton();
         btnGenInf = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        principal = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
-        btnGestion = new javax.swing.JMenu();
-        btnAyuda = new javax.swing.JMenu();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        itemAyuda = new javax.swing.JMenuItem();
 
-        dialogoInforme.setTitle("GIMNASIO AL-ANDALUS -- Informe sobre asistencia a sesiones de entrenamiento");
-        dialogoInforme.setModal(true);
-        dialogoInforme.setResizable(false);
-        dialogoInforme.setSize(new java.awt.Dimension(621, 500));
-        dialogoInforme.setLocationRelativeTo(null);
+        infoSesiones.setTitle("GIMNASIO AL-ANDALUS -- Informe sobre asistencia a sesiones de entrenamiento");
+        infoSesiones.setModal(true);
+        infoSesiones.setResizable(false);
+        infoSesiones.setSize(new java.awt.Dimension(621, 500));
+        infoSesiones.setLocationRelativeTo(null);
 
         jPanel2.setMinimumSize(new java.awt.Dimension(621, 403));
 
@@ -145,71 +190,71 @@ public class gymMEPL extends javax.swing.JFrame {
                 .addGap(81, 81, 81))
         );
 
-        javax.swing.GroupLayout dialogoInformeLayout = new javax.swing.GroupLayout(dialogoInforme.getContentPane());
-        dialogoInforme.getContentPane().setLayout(dialogoInformeLayout);
-        dialogoInformeLayout.setHorizontalGroup(
-            dialogoInformeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout infoSesionesLayout = new javax.swing.GroupLayout(infoSesiones.getContentPane());
+        infoSesiones.getContentPane().setLayout(infoSesionesLayout);
+        infoSesionesLayout.setHorizontalGroup(
+            infoSesionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
-        dialogoInformeLayout.setVerticalGroup(
-            dialogoInformeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        infoSesionesLayout.setVerticalGroup(
+            infoSesionesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("GIMNASIO AL-ANDALUS");
 
-        jPanel1.setPreferredSize(new java.awt.Dimension(400, 277));
+        principal.setPreferredSize(new java.awt.Dimension(400, 277));
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/resource/logogym.jpg"))); // NOI18N
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(93, Short.MAX_VALUE)
+        javax.swing.GroupLayout principalLayout = new javax.swing.GroupLayout(principal);
+        principal.setLayout(principalLayout);
+        principalLayout.setHorizontalGroup(
+            principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(principalLayout.createSequentialGroup()
+                .addGap(66, 66, 66)
                 .addComponent(jLabel2)
-                .addGap(94, 94, 94))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton1)
-                .addGap(12, 12, 12)
+        principalLayout.setVerticalGroup(
+            principalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(principalLayout.createSequentialGroup()
+                .addGap(39, 39, 39)
                 .addComponent(jLabel2)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
 
-        btnGestion.setText("Gestión");
-        btnGestion.setToolTipText("Informe sobre asistencia a sesiones de entrenamiento por cliente Salir");
-        btnGestion.addActionListener(new java.awt.event.ActionListener() {
+        jMenu1.setText("Gestión");
+        jMenu1.setToolTipText("Informe sobre asistencia a sesiones de entrenamiento por cliente ");
+        jMenu1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGestionActionPerformed(evt);
+                jMenu1ActionPerformed(evt);
             }
         });
-        jMenuBar1.add(btnGestion);
 
-        btnAyuda.setText("Ayuda");
-        btnAyuda.setToolTipText("GIMNASIO AL-ANDALUS ---Ayuda General");
-        btnAyuda.addActionListener(new java.awt.event.ActionListener() {
+        jMenuItem1.setText("Gestión");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAyudaActionPerformed(evt);
+                jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenuBar1.add(btnAyuda);
+        jMenu1.add(jMenuItem1);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Ayuda");
+        jMenu2.setToolTipText("GIMNASIO AL-ANDALUS --- Ayuda General");
+
+        itemAyuda.setText("Ayuda");
+        itemAyuda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                itemAyudaActionPerformed(evt);
+            }
+        });
+        jMenu2.add(itemAyuda);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -219,14 +264,14 @@ public class gymMEPL extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addComponent(principal, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -253,7 +298,7 @@ public class gymMEPL extends javax.swing.JFrame {
        }
     }//GEN-LAST:event_btnGenInfActionPerformed
 
-          public  void cargarAyuda(){
+        /*  public  void cargarAyuda(){
         try{
                 //carga el fichero de ayuda
             File fichero =new File("C:\\Userers\\meper\\Desktop\\Perez_Lavandeira_Marcelo_Eliseo_DI05_Tarea\\programa\\Tarea5\\src\\help");
@@ -270,20 +315,18 @@ public class gymMEPL extends javax.swing.JFrame {
 	
         
         }
-    }
-    private void btnGestionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionActionPerformed
-        dialogoInforme.setVisible(true);
-        JOptionPane.showMessageDialog(null,"Mierda");
-    }//GEN-LAST:event_btnGestionActionPerformed
+    }*/
+    private void jMenu1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu1ActionPerformed
+        JOptionPane.showMessageDialog(null,"meirda");
+    }//GEN-LAST:event_jMenu1ActionPerformed
 
-    private void btnAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAyudaActionPerformed
-       this.cargarAyuda();
-    }//GEN-LAST:event_btnAyudaActionPerformed
+    private void itemAyudaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_itemAyudaActionPerformed
+        
+    }//GEN-LAST:event_itemAyudaActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-         dialogoInforme.setVisible(true);
-        //this.cargarAyuda();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        infoSesiones.setVisible(true);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,12 +364,10 @@ public class gymMEPL extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu btnAyuda;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnGenInf;
-    private javax.swing.JMenu btnGestion;
-    private javax.swing.JDialog dialogoInforme;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JDialog infoSesiones;
+    private javax.swing.JMenuItem itemAyuda;
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel1;
@@ -335,8 +376,11 @@ public class gymMEPL extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel principal;
     // End of variables declaration//GEN-END:variables
 }
