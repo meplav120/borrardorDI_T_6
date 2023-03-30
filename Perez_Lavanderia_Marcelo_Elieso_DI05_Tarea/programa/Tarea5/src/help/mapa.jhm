@@ -1,0 +1,6 @@
+<map version="1.0">
+	
+	<!-- categoryclosedimage="FolderClosed" categoryopenimage="FolderOpened" topicimage="ItemIco" -->	
+	<mapID target="gym" url="html/gym.html"/>
+	<mapID target="sesionescliente" url="html/sesionescliente.html"/>	
+</map>
