@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="asistenciaMEPL" language="groovy" pageWidth="595" pageHeight="841" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="366981b7-522d-46c2-a6c5-1b7671e22ce7">
+	<property name="ireport.zoom" value="1.100000000000001"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="desde" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="hasta" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[0]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["D:\\2_DAM\\DESARROLLO DE INTERFACES\\TEMA 5\\PerezLavanderiaMarceloEliseoTarea5\\informes\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="icono" class="java.io.InputStream"/>
+	<queryString>
+		<![CDATA[SELECT
+     clientes.`idCliente` AS clientes_idCliente,
+     clientes.`Nombre` AS clientes_Nombre,
+     clientes.`TipoCliente` AS clientes_TipoCliente,
+     clientes.`Telefono` AS clientes_Telefono,
+     entrenamiento.`tipoEntrenamiento` AS entrenamiento_tipoEntrenamiento,
+     entrenamiento.`sala` AS entrenamiento_sala,
+     entrenamiento.`precioSesion` AS entrenamiento_precioSesion,
+     sesiones.`idSesion` AS sesiones_idSesion,
+     sesiones.`idCliente` AS sesiones_idCliente,
+     sesiones.`idEntrenamiento` AS sesiones_idEntrenamiento,
+     sesiones.`fecha` AS sesiones_fecha,
+     sesiones.`horaInicio` AS sesiones_horaInicio,
+     sesiones.`horaFin` AS sesiones_horaFin
+FROM
+     `entrenamiento` entrenamiento INNER JOIN `sesiones` sesiones ON entrenamiento.`idEntrenamiento` = sesiones.`idEntrenamiento`
+     INNER JOIN `clientes` clientes ON sesiones.`idCliente` = clientes.`idCliente`
+WHERE
+     clientes.`idCliente` BETWEEN $P{desde} AND  $P{hasta}
+order by clientes_idCliente, sesiones_idSesion]]>
+	</queryString>
+	<field name="clientes_idCliente" class="java.lang.Integer"/>
+	<field name="clientes_Nombre" class="java.lang.String"/>
+	<field name="clientes_TipoCliente" class="java.lang.String"/>
+	<field name="clientes_Telefono" class="java.lang.String"/>
+	<field name="entrenamiento_tipoEntrenamiento" class="java.lang.String"/>
+	<field name="entrenamiento_sala" class="java.lang.String"/>
+	<field name="entrenamiento_precioSesion" class="java.lang.Double"/>
+	<field name="sesiones_idSesion" class="java.lang.Integer"/>
+	<field name="sesiones_idCliente" class="java.lang.Integer"/>
+	<field name="sesiones_idEntrenamiento" class="java.lang.Integer"/>
+	<field name="sesiones_fecha" class="java.sql.Date"/>
+	<field name="sesiones_horaInicio" class="java.sql.Time"/>
+	<field name="sesiones_horaFin" class="java.sql.Time"/>
+	<variable name="entrenamiento_precioSesion_1" class="java.lang.Double" resetType="Group" resetGroup="cliente" calculation="Sum">
+		<variableExpression><![CDATA[$F{entrenamiento_precioSesion}]]></variableExpression>
+	</variable>
+	<group name="cliente">
+		<groupExpression><![CDATA[$F{clientes_idCliente}]]></groupExpression>
+		<groupHeader>
+			<band height="105">
+				<textField>
+					<reportElement mode="Opaque" x="129" y="37" width="209" height="20" forecolor="#FFFFFF" backcolor="#999999" uuid="daed0bf1-e115-4c5c-9f39-b875d6fabd45"/>
+					<textFieldExpression><![CDATA[$F{clientes_Nombre}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="351" y="37" width="100" height="20" forecolor="#FFFFFF" backcolor="#999999" uuid="b201ec9d-05b0-4342-93b4-122b51198a31"/>
+					<text><![CDATA[Télefono:]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="10" y="10" width="82" height="20" forecolor="#FFFFFF" backcolor="#999999" uuid="9399b696-da16-4858-829e-79d70d22f47b"/>
+					<textElement textAlignment="Right"/>
+					<text><![CDATA[Nº de CLIENTE: ]]></text>
+				</staticText>
+				<textField>
+					<reportElement mode="Opaque" x="451" y="37" width="104" height="20" forecolor="#FFFFFF" backcolor="#999999" uuid="7b53f3ae-019f-4faf-bb5d-564c53bb63d9"/>
+					<textFieldExpression><![CDATA[$F{clientes_Telefono}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="451" y="10" width="104" height="20" forecolor="#FFFFFF" backcolor="#999999" uuid="317c6352-24b9-4b2b-80a7-f82e9806145c"/>
+					<textFieldExpression><![CDATA[$F{clientes_TipoCliente}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement mode="Opaque" x="92" y="10" width="46" height="20" forecolor="#FFFFFF" backcolor="#999999" uuid="5f6fc2f7-cf3e-452b-aa4a-a7ba5ff5e49c"/>
+					<textFieldExpression><![CDATA[$F{clientes_idCliente}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement mode="Opaque" x="10" y="37" width="119" height="20" forecolor="#FFFFFF" backcolor="#999999" uuid="e6976a5e-3a7a-450c-b0bf-9c01422b7150"/>
+					<textElement textAlignment="Left"/>
+					<text><![CDATA[NOMBRE Y APELLIDOS: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="351" y="10" width="100" height="20" forecolor="#FFFFFF" backcolor="#999999" uuid="c6d178c3-c0e8-4e07-8ab7-b547b41d4694"/>
+					<text><![CDATA[Tipo de Cliente: ]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="0" y="85" width="55" height="20" uuid="17c31f3c-a2bc-4f5e-ba95-0725458ca37f"/>
+					<text><![CDATA[Nº Sesison]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="55" y="85" width="100" height="20" uuid="3fc85043-8561-4512-99eb-7df20e612737"/>
+					<text><![CDATA[Tipo Entrenameinto]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="175" y="85" width="100" height="20" uuid="d59c4474-f54a-4b7f-9047-bcd713997fbd"/>
+					<text><![CDATA[Sala]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="275" y="85" width="53" height="20" uuid="1336676f-ef8e-44c4-b481-5849ea1572b6"/>
+					<text><![CDATA[Fecha]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="351" y="85" width="55" height="20" uuid="8b757666-0327-43ff-a022-bac1ce5b6912"/>
+					<text><![CDATA[Hora Inicio]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="416" y="85" width="47" height="20" uuid="561c5dd5-808e-4be8-9765-35d7044527cc"/>
+					<text><![CDATA[Hora Fin]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="488" y="85" width="56" height="20" uuid="be7befa2-fea3-4f4f-b05d-b299e59420b0"/>
+					<text><![CDATA[importe]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="80">
+				<textField pattern="###0.00">
+					<reportElement x="451" y="0" width="100" height="20" uuid="be78b680-b24d-4ce4-ba2d-79f8a384c242"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{cliente_COUNT}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="195" y="0" width="256" height="20" uuid="15c8b686-4a04-45c5-ac0b-64c6e74fe46b"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[Número de sesiones a las que ha asistido el cliente : ]]></text>
+				</staticText>
+				<textField pattern="¤ #,##0.00">
+					<reportElement x="451" y="30" width="100" height="20" uuid="66a71780-541b-428e-9048-7cf3f3b228b3"/>
+					<textElement textAlignment="Center" verticalAlignment="Middle"/>
+					<textFieldExpression><![CDATA[$V{entrenamiento_precioSesion_1}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="298" y="30" width="153" height="20" uuid="85d05670-3d34-412a-aef0-71370cd33faa"/>
+					<textElement verticalAlignment="Middle"/>
+					<text><![CDATA[IMPORTE TOTAL ABONADO: ]]></text>
+				</staticText>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="183" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="161" width="555" height="22" forecolor="#FFFFFF" backcolor="#FF0000" uuid="42704d08-54b3-4879-9f84-b1643f3d1f3b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Informe sobre asistencia a sesiones de entrenamiento por cliente]]></text>
+			</staticText>
+			<image>
+				<reportElement x="166" y="0" width="201" height="161" uuid="07aeddb8-03e2-4904-b361-46e9fa6c35f5"/>
+				<imageExpression><![CDATA[$P{icono}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="23" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="55" height="20" uuid="dac0e0f4-7bf1-4df0-805a-834f90530e4e"/>
+				<textFieldExpression><![CDATA[$F{sesiones_idSesion}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="65" y="0" width="100" height="20" uuid="fd3215f5-56c5-4794-871e-1d8cfd5d6df9"/>
+				<textFieldExpression><![CDATA[$F{entrenamiento_tipoEntrenamiento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="175" y="0" width="100" height="20" uuid="c098b586-67ff-4544-892b-63f50ad109a4"/>
+				<textFieldExpression><![CDATA[$F{entrenamiento_sala}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="275" y="0" width="53" height="20" uuid="aa1a85a4-db11-4cd1-b60b-8d2d8956adc3"/>
+				<textFieldExpression><![CDATA[$F{sesiones_fecha}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="351" y="0" width="55" height="20" uuid="16a37b6b-64b2-4669-8182-3b74a5514c01"/>
+				<textFieldExpression><![CDATA[$F{sesiones_horaInicio}]]></textFieldExpression>
+			</textField>
+			<textField pattern="HH.mm">
+				<reportElement x="416" y="0" width="47" height="20" uuid="03b5cf0e-6924-4308-83f2-499edc46ced2"/>
+				<textFieldExpression><![CDATA[$F{sesiones_horaFin}]]></textFieldExpression>
+			</textField>
+			<line>
+				<reportElement positionType="Float" x="0" y="20" width="555" height="1" uuid="782795b7-b90c-4811-a883-6119c3ab9256"/>
+			</line>
+			<textField pattern="¤ #,##0.00">
+				<reportElement x="488" y="1" width="56" height="20" uuid="c3ed0df9-b3ee-410a-b1d7-ad9c808e3033"/>
+				<textFieldExpression><![CDATA[$F{entrenamiento_precioSesion}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="123" y="34" width="421" height="20" uuid="fe0f6cca-25b0-4b43-8415-e2d50eb229fc"/>
+				<textElement>
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Detalle del informe en el que se muestran las sesiones de entrenamiento a las que ha asistido un cliente]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="271">
+			<stackedBar3DChart>
+				<chart>
+					<reportElement x="0" y="28" width="555" height="214" uuid="204cdeb5-7d2f-490a-9085-caf7d3fddeb8"/>
+					<chartTitle/>
+					<chartSubtitle/>
+					<chartLegend/>
+				</chart>
+				<categoryDataset>
+					<categorySeries>
+						<seriesExpression><![CDATA[$F{clientes_Nombre}]]></seriesExpression>
+						<categoryExpression><![CDATA[$F{clientes_Nombre}]]></categoryExpression>
+						<valueExpression><![CDATA[$V{entrenamiento_precioSesion_1}]]></valueExpression>
+					</categorySeries>
+				</categoryDataset>
+				<bar3DPlot>
+					<plot/>
+					<itemLabel/>
+					<categoryAxisFormat>
+						<axisFormat/>
+					</categoryAxisFormat>
+					<valueAxisFormat>
+						<axisFormat/>
+					</valueAxisFormat>
+				</bar3DPlot>
+			</stackedBar3DChart>
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="28" uuid="99779884-e193-4603-8398-9949f07706de"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Gráfico comparativo de IMPORTES TOTALES abonados por los clientes ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="242" width="555" height="11" uuid="1b40b2a9-bb5e-4aad-8c7a-458f30e4021a"/>
+				<textElement textAlignment="Center" verticalAlignment="Bottom">
+					<font size="8" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Gráfico que muestra los IPORTES TOTALES ABONADOS por cada cliente del rango considerado
+	]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="138" y="253" width="172" height="10" uuid="b26498d9-f160-4cdb-8c12-0e1dee020de9"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[(Obtenido para los clientes cuyo idCliente oscila entre ]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="310" y="253" width="18" height="10" uuid="a58d34bd-dbda-4fb0-910c-fae0ee2040b1"/>
+				<textElement verticalAlignment="Middle">
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{desde}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="328" y="253" width="10" height="10" uuid="28d34092-b49c-4ed8-bc80-452bc6bd73d5"/>
+				<textElement>
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[y]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="338" y="253" width="13" height="10" uuid="2d6cf446-c904-49a4-9348-50c9c09c1208"/>
+				<textElement>
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{hasta}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="351" y="253" width="65" height="10" uuid="5de1050d-9562-4117-93f1-b33acdcbbf34"/>
+				<textElement>
+					<font size="7" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[ambos incluidos)]]></text>
+			</staticText>
+		</band>
+	</summary>
+</jasperReport>

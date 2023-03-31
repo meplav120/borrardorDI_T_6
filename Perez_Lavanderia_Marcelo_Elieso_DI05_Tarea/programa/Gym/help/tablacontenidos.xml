@@ -1,0 +1,7 @@
+<toc version="1.0">
+	<!-- categoryclosedimage="FolderClosed" categoryopenimage="FolderOpened" topicimage="ItemIco" -->
+	<tocitem text="Ayuda General" target="gym"/>
+        <tocitem text="Informe sobre asistencia a sesioines de entrenamiento por cliente" 
+                 target="sesionescliente"/>
+			
+</toc>
